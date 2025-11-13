@@ -60,6 +60,7 @@ struct ProductRowView: View{
                             .background(.indigo)
                             .clipShape(Capsule())
                     }
+                    .buttonStyle(.plain)
                 }
             }
         }
