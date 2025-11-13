@@ -16,13 +16,7 @@ struct ProductRowView: View{
     var body: some View{
         HStack(spacing: 8){
             if let url = URL(string: product.image){
-                AsyncImage(url: url) { image in
-                    image
-                    .resizable()
-                    .scaledToFit()
-                } placeholder: {
-                    ProgressView()
-                }.frame(width: 100, height: 100)
+                productImage(url: url)
             }
             VStack(alignment: .leading,spacing: 8){
                 Text(product.title)
@@ -50,17 +44,7 @@ struct ProductRowView: View{
                         .font(.title3)
                         .foregroundColor(.indigo)
                     Spacer()
-                    Button {
-                        isBuyClicked = true
-                    } label: {
-                        Text("Buy")
-                            .foregroundColor(.white)
-                            .padding(.vertical,8)
-                            .padding(.horizontal)
-                            .background(.indigo)
-                            .clipShape(Capsule())
-                    }
-                    .buttonStyle(.plain)
+                    buyButton
                 }
             }
         }
@@ -75,6 +59,30 @@ struct ProductRowView: View{
             Text(product.category)
         }
 
+    }
+    
+    var buyButton: some View{
+        Button {
+            isBuyClicked = true
+        } label: {
+            Text("Buy")
+                .foregroundColor(.white)
+                .padding(.vertical,8)
+                .padding(.horizontal)
+                .background(.indigo)
+                .clipShape(Capsule())
+        }
+        .buttonStyle(.plain)
+    }
+    
+    func productImage(url:URL) -> some View{
+        AsyncImage(url: url) { image in
+            image
+            .resizable()
+            .scaledToFit()
+        } placeholder: {
+            ProgressView()
+        }.frame(width: 100, height: 100)
     }
 }
 
